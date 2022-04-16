@@ -26,8 +26,8 @@ def get_rating(board, player) -> int:
         for pl, cel in groupby(i):
             cel = list(cel)
             if pl == player and len(cel) > 1:
-                score += 10 ** len(cel)
-            if pl == 3 - player and len(cel) > 1:
+                score += 100 ** len(cel)
+            if pl == 3 - player and len(cel) > 3:
                 score -= 10 ** len(cel)
 
     return score
