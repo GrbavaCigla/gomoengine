@@ -3,7 +3,7 @@ from typing import List, Tuple
 from sys import argv
 
 from .heuristics import get_rating
-from . import BOARD_SIZE, get_next_minimax_move
+from .minimax import BOARD_SIZE, get_minimax_move
 
 
 def read_moves(filepath: str) -> Tuple[List[List[int]], int]:
@@ -25,6 +25,8 @@ def read_moves(filepath: str) -> Tuple[List[List[int]], int]:
     return (board, max_player)
 
 
+def write_board(board, file):
+    file.write("\n".join([" ".join([str(j) for j in i]) for i in board]))
 
 if __name__ == "__main__":
     if len(argv) != 2:
@@ -33,6 +35,10 @@ if __name__ == "__main__":
 
     board, player = read_moves(argv[1])
 
-    score, x, y = get_next_minimax_move(board, player, float("-inf"), float("inf"))
+    score, x, y = get_minimax_move(board, player, float("-inf"), float("inf"))
+
+    with open("bla.log", "w+") as file:
+        # write_board(board, file)
+        file.write(str(board[0][0]) + " " + str(player) + " " + str(score))
 
     print(x, y)

@@ -27,7 +27,7 @@ def get_rating(board, player) -> int:
             cel = list(cel)
             if pl == player and len(cel) > 1:
                 score += 10 ** len(cel)
-            if pl == 3 - player and len(cel) > 1:
+            elif pl == 3 - player and len(cel) > 1:
                 score -= 10 ** len(cel)
 
     return score
