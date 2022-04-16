@@ -1,8 +1,9 @@
 from typing import Tuple
-from . import BOARD_SIZE
+from . import BOARD_SIZE, is_near
 from .heuristics import get_rating
 
 
+# TODO: For some reason, AI is stupid when depth is above 2
 def get_minimax_move(
     board, player, alpha, beta, depth=2, is_max=True
 ) -> Tuple[float, int, int]:
@@ -18,7 +19,7 @@ def get_minimax_move(
     # TODO: Refactor this mess
     for i in range(BOARD_SIZE):
         for j in range(BOARD_SIZE):
-            if board[i][j] == 0:
+            if board[i][j] == 0 and is_near(board, i, j):
                 board[i][j] = player
                 score, _, _ = get_minimax_move(
                     board, player, alpha, beta, depth - 1, not is_max
