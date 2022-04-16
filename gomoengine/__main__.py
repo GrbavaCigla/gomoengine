@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     score, x, y = get_minimax_move(board, player, float("-inf"), float("inf"))
 
-    # board[x][y] = player
+    board[x][y] = player
     with open("bla.log", "w+") as file:
         file.write(f"{score} {player}\n\n{board_to_str(board)}")
 

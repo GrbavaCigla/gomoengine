@@ -23,11 +23,17 @@ def get_rating(board, player) -> int:
         + transpose(shift(board))
         + transpose(shift(reversed(board)))
     ):
-        for pl, cel in groupby(i):
-            cel = list(cel)
-            if pl == player and len(cel) > 1:
-                score += 100 ** len(cel)
-            if pl == 3 - player and len(cel) > 3:
-                score -= 10 ** len(cel)
+        groups = [(i, len(list(j))) for i, j in groupby(i)]
+        groups = [(0, 1)] + groups + [(0, 1)]
+        # TODO: Prioritize 4 in a row
+        for i in range(1, len(groups) - 1):
+            cur_player, length = groups[i]
 
+            if cur_player > 0:
+                if groups[i - 1][0] == 0 and length > 1:
+                    score += 10 ** length * ((cur_player == player) * 2 - 1)
+                
+                if groups[i + 1][0] == 0 and length > 1:
+                    score += 10 ** length * ((cur_player == player) * 2 - 1)
+            
     return score
