@@ -1,6 +1,8 @@
 from itertools import groupby
 from typing import List
 
+from .constants import PENALTY
+
 
 def transpose(board) -> List[List[int]]:
     return [list(i) for i in zip(*board)]
@@ -14,7 +16,7 @@ def padding(n) -> List[int]:
     return [0 for _ in range(n)]
 
 
-def get_rating(board, player, penalty=2) -> float:
+def get_rating(board, player, penalty=PENALTY) -> float:
     score = 0
 
     for i in (
